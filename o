@@ -1,0 +1,21 @@
+@echo off
+title 7ARBI - TOTAL NETWORK KILL
+color 0C
+cls
+
+echo [!] WARNING: THIS WILL FULLY TERMINATE YOUR CONNECTION
+pause
+
+:kill_switch
+:: 1. إغراق البوابة (Gateway) بطلب إغلاق المسارات
+start /b ping 192.168.10.1 -t -l 65500 -w 1 >nul
+
+:: 2. إرسال حزم "البث العام" لتعطيل الـ DNS
+start /b ping 192.168.10.255 -t -l 65500 -w 1 >nul
+
+:: 3. سحب عنوان الـ IP الخاص بك برمجياً لضمان الفصل
+ipconfig /release >nul
+
+echo [SHUTDOWN] -> INTERNET HAS BEEN TERMINATED
+echo [STATUS] -> OFFLINE
+goto kill_switch
